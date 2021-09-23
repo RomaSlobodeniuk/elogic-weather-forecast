@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Elogic_Forecast::management" sortOrder="20" title="Elogic"
+             module="Elogic_Forecast" dependsOnModule="Elogic_Forecast"
+             resource="Elogic_Forecast::management" translate="title"/>
+        <add id="Elogic_Forecast::management_forecast"
+             title="Elogic Forecast Management"
+             translate="title" sortOrder="10"
+             module="Elogic_Forecast"
+             parent="Elogic_Forecast::management"
+             resource="Elogic_Forecast::management_forecast"
+             action="elogic_forecast/elogicforecast/index"/>
+    </menu>
+</config>

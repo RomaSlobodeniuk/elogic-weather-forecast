@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * Copyright © Elogic, Inc. All rights reserved.
+ */
+declare(strict_types=1);
+
+use Elogic\Forecast\Api\Data\ElogicForecastInterface;
+use Elogic\Forecast\Block\Forecast;
+use Elogic\Forecast\Model\Config\ForecastConfig;
+use Magento\Framework\Escaper;
+
+/**
+ * @var Escaper $escaper
+ * @var Forecast $block
+ * @var ForecastConfig $viewModel
+ * @var ElogicForecastInterface $forecast
+ */
+$forecast = $block->getForecastData();
+$forecastExists = $forecast && $forecast->getEntityId();
+$viewModel = $block->getForecastViewModel();
+$forecastEnabled = $viewModel && $viewModel->getIsEnabled();
+?>
+<?php if ($forecastEnabled && $forecastExists): ?>
+    <div class="elogic-forecast">
+        <div class="row main">
+            <h1 class="column title"><?= $escaper->escapeHtml(__('Elogic Weather Forecast')); ?></h1>
+        </div>
+        <div class="row city-name">
+            <span class="column label"><?= $escaper->escapeHtml(__('City Name')); ?>:</span>
+            <span class="column value"><?= $escaper->escapeHtml($forecast->getCityName()); ?></span>
+        </div>
+        <div class="row city-code">
+            <span class="column label"><?= $escaper->escapeHtml(__('City Code')); ?>:</span>
+            <span class="column value"><?= $escaper->escapeHtml($forecast->getCityCode()); ?></span>
+        </div>
+        <div class="row temperature">
+            <span class="column label"><?= $escaper->escapeHtml(__('Temperature')); ?>:</span>
+            <span class="column value">
+                <?= $escaper->escapeHtml(__('%1 &#176;C.', $forecast->getData('additional/main/temp'))); ?>
+            </span>
+        </div>
+        <div class="row feels-like">
+            <span class="column label"><?= $escaper->escapeHtml(__('Feels like')); ?>:</span>
+            <span class="column value">
+                <?= $escaper->escapeHtml(__('%1 &#176;C.', $forecast->getData('additional/main/feels_like'))); ?>
+            </span>
+        </div>
+        <div class="row description">
+            <span class="column label"><?= $escaper->escapeHtml(__('Description')); ?>:</span>
+            <span class="column value">
+                <?= $escaper->escapeHtml($forecast->getData('additional/info/description')); ?>
+            </span>
+        </div>
+        <div class="row wind">
+            <span class="column label"><?= $escaper->escapeHtml(__('Wind')); ?>:</span>
+            <span class="column value">
+                <?= $escaper->escapeHtml(__('%1 m/s', $forecast->getData('additional/wind/speed'))); ?>
+            </span>
+        </div>
+        <div class="row pressure">
+            <span class="column label"><?= $escaper->escapeHtml(__('Atmospheric pressure')); ?>:</span>
+            <span class="column value">
+                <?= $escaper->escapeHtml(__('%1 Pa', $forecast->getData('additional/main/pressure'))); ?>
+            </span>
+        </div>
+        <div class="row humidity">
+            <span class="column label"><?= $escaper->escapeHtml(__('Humidity')); ?>:</span>
+            <span class="column value">
+                <?= $escaper->escapeHtml(__('%1 %', $forecast->getData('additional/main/humidity'))); ?>
+            </span>
+        </div>
+    </div>
+<?php else: ?>
+    <div class="row main no-results">
+        <h1 class="column title"><?= $escaper->escapeHtml(__('No Forecast Available')); ?></h1>
+    </div>
+<?php endif;?>

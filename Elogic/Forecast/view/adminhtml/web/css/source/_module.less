@@ -1,0 +1,25 @@
+/**
+ * Copyright © Elogic, Inc. All rights reserved.
+ */
+
+
+//
+//  Common
+//  ---------------------------------------------
+
+& when (@media-common = true) {
+    .admin__menu #menu-elogic-forecast-management {
+        > a {
+            &::before {
+                content: url('@{baseDir}Elogic_Forecast/css/images/elogic-commerce.svg');
+                filter: invert(100%);
+                background-size: auto 95%;
+                height: auto;
+            }
+
+            > span {
+                display: none;
+            }
+        }
+    }
+}

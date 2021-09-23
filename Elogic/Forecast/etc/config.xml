@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <elogic>
+            <general>
+                <enabled>1</enabled>
+                <api_url>https://api.openweathermap.org/data/2.5/weather</api_url>
+                <api_key>f805ebf449a01a27a409da2c1d644d35</api_key>
+                <city_id>765876</city_id>
+                <units>metric</units>
+            </general>
+        </elogic>
+    </default>
+</config>

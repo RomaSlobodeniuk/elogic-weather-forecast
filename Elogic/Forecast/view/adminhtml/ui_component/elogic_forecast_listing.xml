@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">elogic_forecast_listing.elogic_forecast_listing_data_source</item>
+            <item name="deps" xsi:type="string">elogic_forecast_listing.elogic_forecast_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>elogic_forecast_listing_columns</spinner>
+        <deps>
+            <dep>elogic_forecast_listing.elogic_forecast_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="elogic_forecast_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Elogic_Forecast::management</aclResource>
+        <dataProvider class="Elogic\Forecast\Ui\DataProvider\ElogicForecastDataProvider"
+                      name="elogic_forecast_listing_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <columnsControls name="columns_controls"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="elogic_forecast_listing_columns">
+        <column name="entity_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="city_name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">City Name</label>
+            </settings>
+        </column>
+        <column name="city_code">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">City Code</label>
+            </settings>
+        </column>
+        <column name="info">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Info</label>
+            </settings>
+        </column>
+        <column name="main">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Main</label>
+            </settings>
+        </column>
+        <column name="wind">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Wind</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <dateFormat>yyyy-MM-dd hh:mm:ss</dateFormat>
+                <label translate="true">Date</label>
+                <timezone>false</timezone>
+            </settings>
+        </column>
+    </columns>
+</listing>
